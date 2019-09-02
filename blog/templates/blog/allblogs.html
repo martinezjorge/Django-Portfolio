@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Jorge Martinez</title>
+    <title>Jorge's Blog</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
 
@@ -40,7 +40,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-            <a class="navbar-brand active" href="{% url 'home' %}">Jorge Martinez</a>
+            <a class="navbar-brand" href="{% url 'home' %}">Jorge Martinez</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@
                 <div class="navbar-nav ml-auto">
                     <a class="nav-item nav-link" href="http://www.github.com/martinezjorge">GitHub</a>
                     <a class="nav-item nav-link" href="{% static 'Resume-Tutor.pdf' %}">Resume</a>
-                    <a class="nav-item nav-link" href="{% url 'allblogs' %}">Blog</a>
+                    <a class="nav-item nav-link active" href="{% url 'allblogs' %}">Blog</a>
                 </div>
             </div>
 
@@ -60,46 +60,32 @@
 
     <main role="main">
 
-        <section class="jumbotron text-center">
-            <div class="container">
-                <h1 class="jumbotron-heading">Jorge Martinez</h1>
-                <p class="lead text-muted">Software engineer specializing in Machine Learning and Web Engineering. I
-                    would
-                    proudly consider myself a python developer. I love using python for all my needs. I do Back End
-                    development
-                    with python using Django and Flash. I also use python for any data science utilizing pandas,
-                    seaborn, scikit-learn,
-                    and pytorch.
-                </p>
-                <p>
-                    <a href="mailto:martinezjorge273@gmail.com" class="btn btn-primary my-2">Email me!</a>
-                </p>
-                <img class="img-fluid" src="{% static 'surprised_pikachu.png' %}" width="300" height="300">
-            </div>
-        </section>
+        <div class="container">
 
-        <div class="album py-5 bg-light">
-            <div class="container">
+            <h1 class="text-center pt-3">Welcome to Jorge's Blog</h1>
+            <br>
+            <br>
+            <h2 class="text-center">Latest Posts</h2>
+            <hr>
 
-                <div class="row">
+            {% for blog in blogs.all %}
 
-                    {% for job in jobs.all %}
+                <a href="{% url 'detail' blog.id %}"><h3>{{ blog.title }} </h3></a>
 
-                    <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm">
+                {{ blog.date_pretty }}
 
-                            <img class="card-img-top" src="{{ job.image.url }}" width="100%" height="225" />
-                            <div class="card-body">
-                                <p class="card-text"> {{ job.summary }} </p>
-                            </div>
-                        </div>
-                    </div>
+                <br>
 
-                    {% endfor %}
+                <img class="img-fluid" src="{{ blog.image.url }}" width="400" height="200">
 
-                </div>
-            </div>
+                <br>
+
+                <p>{{ blog.summary }}...</p>
+
+            {% endfor %}
+
         </div>
+
 
     </main>
 
